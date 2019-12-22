@@ -1,0 +1,25 @@
+{
+  "name": "holiday-wish-list",
+  "version": "1.0.0",
+  "description": "Built with:\r - HTML\r - VanillaJS\r - Node\r - Express\r - SQL\r - Sequelize",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ceceliacreates/holiday-wish-list.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ceceliacreates/holiday-wish-list/issues"
+  },
+  "homepage": "https://github.com/ceceliacreates/holiday-wish-list#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mysql2": "^2.0.2",
+    "sequelize": "^5.21.3"
+  }
+}
