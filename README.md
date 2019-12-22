@@ -33,14 +33,12 @@ Functionality:
   - Item name (required)
   - Item link (optional)
   - Item note (optional)
-- Edit an item on the wishlist
 - Delete an item from the wishlist
 - Send the wishlist to an email address
 
 API Endpoints:
 - Get list of items on wishlist (findAll and returns results)
 - Post a new item to wishlist (create based on request body)
-- Put an update to an existing wishlist item (updates item with given ID based on request body)
 - Delete an existing wishlist item (destroy item with given ID based on request body)
 
 Database Models:
@@ -61,7 +59,7 @@ Item Class:
   - URL
   - Note
 - Methods
-  - Add (sends input as a post request to '/api/add' endpoint)
+  - Add (sends input as a post request to '/api/add' endpoint, then upon successful response appends item to wish list)
   - Edit (sends ID + Edit input fields as put request to '/api/edit' endpoint)
   - Delete (receives ID and sends ID as delete request to 'api/delete' endpoint)
   - Validate (checks that required field(s) is/are not null and have a length of at least 1 then returns boolean)
