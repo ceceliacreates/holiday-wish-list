@@ -13,13 +13,13 @@ function initiateWishlist() {
             const list = document.getElementById('list');
             items.forEach(item => {
                 //creates instance of Item class
-                const listItem = new Item(item.id, item.name, item.URL, item.description);
+                const listItem = new Item(item.name, item.URL, item.description, item.id);
 
                 console.log(listItem);
 
                 //creates elements
                 const itemNode = document.createElement('div');
-                const itemName = document.createElement('h5');
+                const itemName = document.createElement('h3');
                 const itemURL = document.createElement('a');
                 const itemDescription = document.createElement('p');
 
@@ -27,9 +27,10 @@ function initiateWishlist() {
                 itemName.innerText = listItem.name;
                 itemURL.innerText = listItem.URL? listItem.URL : "No URL";
                 itemURL.src = listItem.URL? listItem.URL : "#";
+                itemURL.style.fontStyle = 'italic';
                 itemDescription.innerText = listItem.description? listItem.description : "No Description";
 
-                //creates buttons with edit and delete methods on click
+                //creates delete button
                 const deleteButton = document.createElement("button");
                 deleteButton.setAttribute('onclick', `delete(${listItem.id})`)
                 deleteButton.innerText = 'X';
@@ -51,5 +52,36 @@ function initiateWishlist() {
     
     })
 }
+
+document.getElementById("add-button").addEventListener("click", event => {
+    event.preventDefault();
+
+    //grabs values from form
+    const itemName = document.getElementById("add-name").value;
+    const itemURL = document.getElementById("add-URL").value;
+    const itemDescription = document.getElementById("add-description").value;
+
+    //creates instance of Item class
+    const newItem = new Item(itemName, itemURL, itemDescription);
+
+    //validates new Item
+    // const isValid = newItem.validate();
+
+    // if (isValid) {
+    //     newItem.add();
+    // }
+
+
+    newItem.add().then(response => {
+        if (response == true) {
+
+            updateMessage("Item added!");
+        }
+        else {
+            updateMessage("Uh-oh! Unable to add item.");
+        }
+    });
+
+})
 
 initiateWishlist();

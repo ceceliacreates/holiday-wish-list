@@ -1,50 +1,60 @@
 export default class Item {
-    constructor(id, name, URL, description) {
-        this.id = id;
+    constructor(name, URL, description, id) {
         this.name = name;
         this.URL = URL;
         this.description = description;
+        this.id = id;
     }
 
-    add(item) {
+    add() {
+        return new Promise(resolve => {
 
-        //sends item to API endpoint
+            //sends item to API endpoint
         fetch("/api/add", {
-            method: POST,
+            method: "POST",
             headers: {
                 'Content-type': 'application/json'
             },
-            body: JSON.stringify(item)
-        }).then(response => {
-            if (response.status == 200) {
+            body: JSON.stringify(this)
+        }).then(response => {return response.json()}).then(response => {
+            if (response) {
+                console.log(response);
+                const listItem = response;
                 //-- adds item to list upon successful response
 
                 //creates new elements to hold new item
-                const itemName = document.createElement('h5');
-                itemName.innerText = item.name;
+                const itemName = document.createElement('h3');
+                itemName.innerText = listItem.name;
                 const itemURL = document.createElement('a');
-                itemURL.innerText = item.URL;
-                itemURL.src = item.URL;
+                itemURL.innerText = listItem.URL;
+                itemURL.style.fontStyle = 'italic';
+                itemURL.src = listItem.URL;
                 const itemDescription = document.createElement('p');
-                itemDescription.innerText = item.description;
+                itemDescription.innerText = listItem.description;
+
+                const deleteButton = document.createElement("button");
+                deleteButton.setAttribute('onclick', `delete(${listItem.id})`)
+                deleteButton.innerText = 'X';
 
                 const newItem = document.createElement('div');
                 newItem.appendChild(itemName);
                 newItem.appendChild(itemURL);
                 newItem.appendChild(itemDescription);
+                newItem.appendChild(deleteButton);
+                
 
                 //grabs list div and appends new item
                 const list = document.getElementById('list');
                 list.appendChild(newItem);
 
-                //updates message
-                updateMessage("Item added!");
+                resolve(true);
             }
 
             else {
-                //updates message that there was an error
-                updateMessage("Uh-oh! Unable to add item.");
+                resolve(false);
             }
+        })
+
         })
 
     }
