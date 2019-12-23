@@ -10,50 +10,22 @@ export default class Item {
         return new Promise(resolve => {
 
             //sends item to API endpoint
-        fetch("/api/add", {
-            method: "POST",
-            headers: {
-                'Content-type': 'application/json'
-            },
-            body: JSON.stringify(this)
-        }).then(response => {return response.json()}).then(response => {
-            if (response) {
-                console.log(response);
-                const listItem = response;
-                //-- adds item to list upon successful response
+            fetch("/api/add", {
+                method: "POST",
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify(this)
+            }).then(response => { return response.json() }).then(response => {
+                if (response) {
 
-                //creates new elements to hold new item
-                const itemName = document.createElement('h3');
-                itemName.innerText = listItem.name;
-                const itemURL = document.createElement('a');
-                itemURL.innerText = listItem.URL;
-                itemURL.style.fontStyle = 'italic';
-                itemURL.src = listItem.URL;
-                const itemDescription = document.createElement('p');
-                itemDescription.innerText = listItem.description;
+                    resolve(true);
+                }
 
-                const deleteButton = document.createElement("button");
-                deleteButton.setAttribute('onclick', `delete(${listItem.id})`)
-                deleteButton.innerText = 'X';
-
-                const newItem = document.createElement('div');
-                newItem.appendChild(itemName);
-                newItem.appendChild(itemURL);
-                newItem.appendChild(itemDescription);
-                newItem.appendChild(deleteButton);
-                
-
-                //grabs list div and appends new item
-                const list = document.getElementById('list');
-                list.appendChild(newItem);
-
-                resolve(true);
-            }
-
-            else {
-                resolve(false);
-            }
-        })
+                else {
+                    resolve(false);
+                }
+            })
 
         })
 
@@ -75,15 +47,16 @@ export default class Item {
     //             const editedItem = document.getElementById(item.id);
 
     //             //sets item elements based on updated values
-                
+
     //         }
     //     })
 
     // }
 
-    // delete(item) {
+    delete(id) {
+        console.log(id);
 
-    // }
+    }
 
     // validate(item) {
 
