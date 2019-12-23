@@ -94,7 +94,7 @@ document.getElementById("add-button").addEventListener("click", event => {
 
 })
 
-//-- Delete Buttons
+//-- Delete Buttons (need to remove)
 
 Array.from(document.getElementsByClassName('delete')).forEach(button => {
     button.addEventListener('click', event => {
@@ -109,7 +109,6 @@ Array.from(document.getElementsByClassName('delete')).forEach(button => {
         const itemToDelete = new Item();
         itemToDelete.delete(id);
 })
-
 
 })
 
