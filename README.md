@@ -13,9 +13,6 @@ Testing with:
 
 File Structure:
 - app
-  - api
-    - api-routes.js
-    - html-routes.js
   - public
     - index.html
   - scripts
