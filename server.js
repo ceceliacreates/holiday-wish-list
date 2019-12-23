@@ -1,13 +1,13 @@
 let items = require("./data/items.json")
 
-const express= require("express");
+const express = require("express");
 const path = require("path");
 const app = express();
 
 
 const PORT = 9898;
 
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 //serve all scripts files
@@ -39,8 +39,22 @@ app.post("/api/add", function (req, res) {
     res.json(newItem);
 })
 
+app.post("/api/delete", function (req, res) {
+    console.log(req.body);
+    const itemToDelete = req.body.id;
+
+    const item = items.find(element => element.id == itemToDelete);
+
+
+    const index = items.indexOf(item);
+    items.splice(index, 1);
+
+    res.json(items);
+
+})
+
 //Starts server
 
 app.listen(PORT, function () {
-                console.log("App running on port" + PORT);
-            });
+    console.log("App running on port" + PORT);
+});

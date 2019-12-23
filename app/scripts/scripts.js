@@ -7,6 +7,39 @@ function updateMessage(message) {
     messageNode.innerText = message;
 }
 
+function handleClick(event) {
+    event.preventDefault();
+
+    //gets ID from button
+    let id = event.target.id;
+    id = id.slice(id.length-1)
+    
+    //create new instance of Item
+    const itemToDelete = new Item();
+    itemToDelete.delete(id).then(response => {
+        if (response == true) {
+
+
+            updateMessage("Item deleted.");
+            clearWishList();
+            initiateWishlist();
+        }
+        else {
+            updateMessage("Uh-oh! Unable to delete item.");
+        }
+    });
+}
+
+function clearWishList() {
+    // grabs list node
+
+    const listNode = document.getElementById("list");
+    while(listNode.childNodes[2]) {
+        listNode.removeChild(listNode.childNodes[2]);
+    }
+
+}
+
 function renderToList(listItem) {
     //creates elements
     const itemNode = document.createElement('div');
@@ -24,7 +57,7 @@ function renderToList(listItem) {
     //creates delete button
     const deleteButton = document.createElement("button");
     deleteButton.setAttribute('id', `delete-${listItem.id}`)
-    deleteButton.classList.add('delete');
+    deleteButton.onclick = handleClick;
     deleteButton.innerText = 'X';
 
     //appends to item div
@@ -91,24 +124,6 @@ document.getElementById("add-button").addEventListener("click", event => {
             updateMessage("Uh-oh! Unable to add item.");
         }
     });
-
-})
-
-//-- Delete Buttons (need to remove)
-
-Array.from(document.getElementsByClassName('delete')).forEach(button => {
-    button.addEventListener('click', event => {
-        event.preventDefault();
-    
-        // grabs ID of button clicked
-        let id = event.target.id;
-        id = id.slice((id.length - 1));
-    
-        // creates instance of Item
-    
-        const itemToDelete = new Item();
-        itemToDelete.delete(id);
-})
 
 })
 

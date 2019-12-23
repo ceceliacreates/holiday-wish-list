@@ -54,7 +54,32 @@ export default class Item {
     // }
 
     delete(id) {
-        console.log(id);
+        return new Promise(resolve => {
+            // creates object from ID
+            const body = {
+                "id": id
+            }
+
+            //sends item to API endpoint
+            fetch("/api/delete", {
+                method: "POST",
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify(body)
+            }).then(response => { return response.json() }).then(response => {
+                if (response) {
+
+                    resolve(true);
+                }
+
+                else {
+                    resolve(false);
+                }
+            })
+
+        })
+       
 
     }
 
