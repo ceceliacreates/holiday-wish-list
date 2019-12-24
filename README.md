@@ -8,6 +8,7 @@ Built with:
 
 Testing with:
 - Cypress.io
+- Cypress CI Integration
 
 Functionality:
 - Add an item to wishlist
