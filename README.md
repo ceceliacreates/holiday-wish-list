@@ -9,7 +9,6 @@ Built with:
 Testing with:
 - Cypress.io
 
-
 Functionality:
 - Add an item to wishlist
   - Item name (required)
