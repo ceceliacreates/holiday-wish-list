@@ -1,15 +1,11 @@
-//-- Navigation
-
 describe('Navigate to app', function() {
     it('navigates to app', function() {
       cy.visit('http://localhost:9898')
     })
   })
 
-//-- Validation of Elements on Page
-
 describe('Validates HTMl elements on page have loaded correctly', function() {
-  it('valides h1', function() {
+  it('validates h1', function() {
     cy.get('h1').should('have.text', 'Holiday Wish List');
   })
 
@@ -25,8 +21,6 @@ describe('Validates HTMl elements on page have loaded correctly', function() {
     cy.get('[for="description"]').should('have.text', 'Item Description')
   })
 })
-
-//-- Get Functionality Tests (number of elements, item name/URL/description)
 
 describe('Validates initial wish list items are correct', function() {
   it('verifies message field is blank', function() {
@@ -50,8 +44,6 @@ describe('Validates initial wish list items are correct', function() {
   })
 })
 
-//-- Add Functionality Tests (renders to DOM, message updates)
-
 describe('Validates Add Item functionality works', function() {
   it('adds a book item', function() {
     cy.get('#add-name').type("Book");
@@ -68,8 +60,6 @@ describe('Validates Add Item functionality works', function() {
     cy.get(':nth-child(6) > h3').should('have.text', 'Book')
   })
 })
-
-//-- Delete Functionality Test (API, removes from DOM, message updates)
 
 describe('Valides delete functionality works', function() {
   it('deletes the pony', function() {
